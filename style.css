@@ -679,10 +679,15 @@ main { overflow-x: clip; }
 .hero::before, .hero::after { pointer-events: none; }
 .hero-bg { position: absolute; pointer-events: none; }
 
-/* 案5 の色：案6 と同じ作りの緑版。淡い緑 × N-Free の緑。背景の動きは pat-*.css（--p-* がその色）。お悩みセクション以降は元の緑のまま */
+/* 案5 の色：案6 と同じ作りの緑版。淡い緑 × N-Free の緑。背景の動きは pat-*.css（--p-* がその色）。お悩みセクション以降の色面は、それより淡い緑 */
 .hero { --h-bg: #eaf6f0; --h-text: #121212; --h-accent: #21b384; --h-line: #121212; --h-chip-bg: #121212; --h-chip-text: #fff; --h-btn-bg: #21b384; --h-btn-text: #fff; --h-tag-bg: #fff; --h-tag-text: #121212; --h-marker: rgba(33, 179, 132, .3);
   --p-card: #fff; --p-edge: rgba(18, 18, 18, .05); --p-bar: #dbe9e2; --p-accent: #21b384; --p-shadow: rgba(20, 90, 65, .15); --p-paper: #fff; --p-print: #cbdcd4; --p-route: rgba(18, 18, 18, .3); --p-grid: rgba(18, 18, 18, .07); }
-:root { --c-bg-alt: #eef7f2; }
+:root { --c-green: #8fddbd; --c-bg-alt: #eef7f2; }
+/* 色面を淡くしたぶん、白地の上で文字や線として使う所は元の緑のままにする */
+.step-number { color: #21b384; }
+.voice { border-left-color: #21b384; }
+/* 淡い色面の上では白い数字が読めないので、濃い緑にする */
+.feature::before { color: #0c8f66; }
 
 /* 背景パターン「撮る→記帳される」：小さなレシートがトップ全体から曲線を描いてスマホ画像に吸い込まれ、チェックの付いた整った行になって出てくる（SVG は script.js が置く） */
 .w-flow { left: var(--px, 80%); top: var(--py, 50%); width: 1px; height: 1px; overflow: visible; animation: q-fade 1.6s ease-out both; }
