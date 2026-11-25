@@ -295,7 +295,9 @@ $(function(){
     var html = '<div class="hero-bg w-waves" aria-hidden="true">';
     layers.forEach(function (l, i) {
         html += '<svg viewBox="0 0 4800 2000" preserveAspectRatio="none" focusable="false" style="--y:' + l[0] + '%;--t:' + l[1] + 's;--b:' + l[2] + 's">'
-            + '<path d="' + wave + 'V2000H0Z"/>' + (i === 1 ? '<path class="w-edge" d="' + wave + '"/>' : '') + '</svg>';
+            + '<path d="' + wave + 'V2000H0Z"/>'
+            + (i === 1 ? '<path class="w-edge" d="' + wave + '"/><path class="w-glint" pathLength="1000" d="' + wave + '"/>' : '')
+            + (i === 3 ? '<path class="w-edge2" d="' + wave + '"/><path class="w-glint w-glint2" pathLength="1000" d="' + wave + '"/>' : '') + '</svg>';
     });
     host.insertAdjacentHTML('afterbegin', html + '</div>');
 })();
