@@ -679,13 +679,13 @@ main { overflow-x: clip; }
 .hero::before, .hero::after { pointer-events: none; }
 .hero-bg { position: absolute; pointer-events: none; }
 
-/* 案5：ネイビー × 白文字 × 金。ゆるやかな波が 4 層、トップ全体に重なって、それぞれ違う速さで流れ続ける（SVG は script.js が置く） */
-.hero { --h-bg: #12284b; --h-text: #fff; --h-accent: #e9c46a; --h-line: rgba(255, 255, 255, .55); --h-chip-bg: #fff; --h-chip-text: #12284b; --h-btn-bg: #fff; --h-btn-text: #12284b; --h-tag-bg: #e9c46a; --h-tag-text: #12284b; --h-marker: rgba(233, 196, 106, .4); }
+/* 案5：落ち着いたブルー × 白文字 × 金。ゆるやかな波が 4 層、トップ全体に重なって、それぞれ違う速さで流れ続ける（SVG は script.js が置く） */
+.hero { --h-bg: #2f5f9e; --h-text: #fff; --h-accent: #f4d27a; --h-line: rgba(255, 255, 255, .55); --h-chip-bg: #fff; --h-chip-text: #1d3f6e; --h-btn-bg: #fff; --h-btn-text: #1d3f6e; --h-tag-bg: #f4d27a; --h-tag-text: #1d3f6e; --h-marker: rgba(233, 196, 106, .4); }
 .w-waves { inset: 0; overflow: hidden; animation: q-fade 2s ease-out both; --p: 1200px; }
 .w-waves svg { position: absolute; left: 0; top: var(--y); width: calc(var(--p) * 4); height: calc(var(--p) * 1.6667); animation: w-flow var(--t) linear infinite, w-bob var(--b) ease-in-out infinite alternate; }
 .w-waves svg:nth-child(even) { animation-direction: reverse, alternate; }
-.w-waves path { fill: rgba(255, 255, 255, .055); }
-.w-waves .w-edge { fill: none; stroke: rgba(233, 196, 106, .5); stroke-width: 2; }
+.w-waves path { fill: rgba(255, 255, 255, .07); }
+.w-waves .w-edge { fill: none; stroke: rgba(240, 208, 128, .7); stroke-width: 2; }
 @keyframes w-flow { to { transform: translateX(calc(var(--p) * -1)); } }
 @keyframes w-bob { from { margin-top: -14px; } to { margin-top: 14px; } }
 @media (max-width: 768px) { .w-waves { --p: 620px; } }
