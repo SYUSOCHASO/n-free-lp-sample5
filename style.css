@@ -701,23 +701,24 @@ main { overflow-x: clip; }
 .w-flow .w-sp { display: none; }
 @media (max-width: 768px) { .w-flow .w-pc { display: none; } .w-flow .w-sp { display: inline; } }
 
-/* トップのボタン B：黒い大きな角ボタン。ずらした緑の影があり、影に向かって沈んでは戻る動きを繰り返す。
-   「期間限定」はボタンの上に付く札にして、点が点滅する。矢印は右端の緑のマスの中で動く */
-.hero .hero-cta { margin-top: 76px; }
-.hero .btn-hero, .hero .btn-hero:hover { position: relative; overflow: visible; min-height: 96px; padding: 0 0 0 40px; gap: 32px; font-size: 26px; letter-spacing: .04em; color: #fff; background: #121212; border-color: #121212;
-  box-shadow: 12px 12px 0 var(--h-accent);
-  animation: btn-open .9s var(--ease-out) 1.3s both, btn-sink 1.3s cubic-bezier(.5, 0, .5, 1) 2.3s infinite alternate; }
-.hero .btn-tag, .hero .btn-hero:hover .btn-tag { position: absolute; left: -1px; bottom: 100%; align-self: auto; padding: 8px 18px 8px 34px; font-size: 14px; font-weight: 900; letter-spacing: .08em; color: #fff; background: var(--h-accent); }
-.hero .btn-tag::before { content: ""; position: absolute; left: 14px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: #fff; animation: btn-blink 1s steps(1) 2.3s infinite; }
-.hero .btn-arrow { box-sizing: border-box; align-self: stretch; width: 96px; height: auto; padding: 0 34px; margin-left: 0; color: #fff; background: var(--h-accent); animation: none; }
-.hero .btn-arrow path { animation: btn-dash 1s cubic-bezier(.5, 0, .5, 1) 2.3s infinite; }
-@keyframes btn-open { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(-60px); } }
-@keyframes btn-sink { from { transform: translate(0, 0); box-shadow: 12px 12px 0 var(--h-accent); } to { transform: translate(8px, 8px); box-shadow: 4px 4px 0 var(--h-accent); } }
-@keyframes btn-blink { 0% { opacity: 1; } 50% { opacity: .2; } }
-@keyframes btn-dash { 0%, 100% { transform: translateX(-3px); } 50% { transform: translateX(3px); } }
+/* トップのボタン F：左端に縦書きの「期間限定」、右端は矢印が右へ流れ続ける帯。ボタン全体は浮き上がっては戻る */
+.hero .hero-cta { margin-top: 52px; }
+.hero .btn-hero, .hero .btn-hero:hover { --edge: color-mix(in srgb, var(--h-btn-bg) 68%, #000); position: relative; overflow: hidden; min-height: 102px; padding: 0; gap: 0; font-size: 26px; letter-spacing: .04em; color: #fff; background: var(--h-btn-bg); border: 0; border-radius: 12px;
+  animation: btn-pop .7s cubic-bezier(.34, 1.56, .64, 1) 1.3s both, btn-lift 1.2s cubic-bezier(.5, 0, .5, 1) 2.3s infinite alternate; }
+.hero .btn-tag, .hero .btn-hero:hover .btn-tag { align-self: stretch; justify-content: center; writing-mode: vertical-rl; padding: 0 13px; font-size: 15px; font-weight: 900; letter-spacing: .16em; color: #fff; background: #121212; animation: btn-flash 1.2s steps(1) 2.3s infinite; }
+.hero .btn-hero .btn-label { padding: 0 34px 0 30px; }
+.hero .btn-arrow { display: none; }
+.hero .btn-hero::after { content: ""; position: relative; inset: auto; flex: none; align-self: stretch; width: 108px; transform: none; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath d='M10 7l8 8-8 8' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 0 50% / 30px 30px repeat-x, var(--edge);
+  animation: btn-convey .55s linear infinite; }
+@keyframes btn-pop { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
+@keyframes btn-lift { from { transform: translateY(0); box-shadow: 0 6px 0 var(--edge), 0 10px 14px color-mix(in srgb, var(--h-btn-bg) 30%, transparent); } to { transform: translateY(-7px); box-shadow: 0 13px 0 var(--edge), 0 30px 34px color-mix(in srgb, var(--h-btn-bg) 40%, transparent); } }
+@keyframes btn-flash { 0% { background: #121212; } 50% { background: var(--edge); } }
+@keyframes btn-convey { to { background-position: 30px 50%, 0 0; } }
 @media (max-width: 768px) {
-  .hero .hero-cta { margin-top: 64px; }
-  .hero .btn-hero, .hero .btn-hero:hover { width: calc(100% - 8px); min-height: 80px; padding: 0 0 0 22px; gap: 10px; font-size: 21px; justify-content: flex-start; box-shadow: 8px 8px 0 var(--h-accent); }
-  .hero .btn-arrow { width: 72px; padding: 0 24px; margin-left: auto; }
-  @keyframes btn-sink { from { transform: translate(0, 0); box-shadow: 8px 8px 0 var(--h-accent); } to { transform: translate(5px, 5px); box-shadow: 3px 3px 0 var(--h-accent); } }
+  .hero .hero-cta { margin-top: 44px; }
+  .hero .btn-hero, .hero .btn-hero:hover { width: 100%; min-height: 86px; font-size: 20px; justify-content: flex-start; }
+  .hero .btn-tag, .hero .btn-hero:hover .btn-tag { padding: 0 11px; font-size: 13px; }
+  .hero .btn-hero .btn-label { flex: 1; padding: 0 8px 0 18px; text-align: left; }
+  .hero .btn-hero::after { width: 76px; }
 }
