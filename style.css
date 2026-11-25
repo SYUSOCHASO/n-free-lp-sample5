@@ -679,17 +679,19 @@ main { overflow-x: clip; }
 .hero::before, .hero::after { pointer-events: none; }
 .hero-bg { position: absolute; pointer-events: none; }
 
-/* 案5：落ち着いたブルー × 白文字 × 金。ゆるやかな波が 4 層、トップ全体に重なって、それぞれ違う速さで流れ続け、波の縁を小さな光が滑っていく（SVG は script.js が置く） */
-.hero { --h-bg: #2f5f9e; --h-text: #fff; --h-accent: #f4d27a; --h-line: rgba(255, 255, 255, .55); --h-chip-bg: #fff; --h-chip-text: #1d3f6e; --h-btn-bg: #fff; --h-btn-text: #1d3f6e; --h-tag-bg: #f4d27a; --h-tag-text: #1d3f6e; --h-marker: rgba(233, 196, 106, .4); }
-.w-waves { inset: 0; overflow: hidden; animation: q-fade 2s ease-out both; --p: 1200px; }
-.w-waves svg { position: absolute; left: 0; top: var(--y); width: calc(var(--p) * 4); height: calc(var(--p) * 1.6667); animation: w-flow var(--t) linear infinite, w-bob var(--b) ease-in-out infinite alternate; }
-.w-waves svg:nth-child(even) { animation-direction: reverse, alternate; }
-.w-waves path { fill: rgba(255, 255, 255, .07); }
-.w-waves .w-edge { fill: none; stroke: rgba(240, 208, 128, .7); stroke-width: 2; }
-.w-waves .w-edge2 { fill: none; stroke: rgba(255, 255, 255, .35); stroke-width: 1.5; }
-.w-waves .w-glint { fill: none; stroke: #fff3cf; stroke-width: 5; stroke-linecap: round; stroke-dasharray: 16 234; animation: w-glint 7s linear infinite; }
-.w-waves .w-glint2 { stroke: #fff; stroke-width: 4; stroke-dasharray: 10 240; animation-duration: 10s; animation-direction: reverse; }
-@keyframes w-flow { to { transform: translateX(calc(var(--p) * -1)); } }
-@keyframes w-bob { from { margin-top: -26px; } to { margin-top: 26px; } }
-@keyframes w-glint { to { stroke-dashoffset: -250; } }
-@media (max-width: 768px) { .w-waves { --p: 620px; } }
+/* 案5 の色：案6 と同じ作りの緑版。淡い緑 × N-Free の緑。背景の動きは pat-*.css（--p-* がその色）。お悩みセクション以降は元の緑のまま */
+.hero { --h-bg: #eaf6f0; --h-text: #121212; --h-accent: #21b384; --h-line: #121212; --h-chip-bg: #121212; --h-chip-text: #fff; --h-btn-bg: #21b384; --h-btn-text: #fff; --h-tag-bg: #fff; --h-tag-text: #121212; --h-marker: rgba(33, 179, 132, .3);
+  --p-card: #fff; --p-edge: rgba(18, 18, 18, .05); --p-bar: #dbe9e2; --p-accent: #21b384; --p-shadow: rgba(20, 90, 65, .15); --p-paper: #fff; --p-print: #cbdcd4; --p-route: rgba(18, 18, 18, .3); --p-grid: rgba(18, 18, 18, .07); }
+:root { --c-bg-alt: #eef7f2; }
+
+/* 背景パターン「撮る→記帳される」：小さなレシートがトップ全体から曲線を描いてスマホ画像に吸い込まれ、チェックの付いた整った行になって出てくる（SVG は script.js が置く） */
+.w-flow { left: var(--px, 80%); top: var(--py, 50%); width: 1px; height: 1px; overflow: visible; animation: q-fade 1.6s ease-out both; }
+.w-flow .w-paper { fill: var(--p-paper); }
+.w-flow .w-shade { fill: var(--p-shadow); }
+.w-flow .w-print { fill: var(--p-print); }
+.w-flow .w-mark { fill: var(--p-accent); }
+.w-flow .w-tick { fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.w-flow .w-pulse { fill: none; stroke: var(--p-accent); stroke-width: 2; }
+.w-flow .w-halo { fill: var(--p-accent); opacity: .12; }
+.w-flow .w-sp { display: none; }
+@media (max-width: 768px) { .w-flow .w-pc { display: none; } .w-flow .w-sp { display: inline; } }
