@@ -285,15 +285,17 @@ $(function(){
 })();
 
 /* ------------------------------------------------------------
-   案5：幾何学タイル。q=四分円 / c=円 / h=半円 / t=三角 / e=空き（回る動きは CSS）
+   案5：重なる波。同じ波形を 4 層、高さ・速さを変えて置く（流れる動きは CSS）
 ------------------------------------------------------------ */
 (function () {
     var host = document.querySelector('.hero');
     if (!host) return;
-    var shapes = ['q', 'c', 't', 'h', 'e', 'q', 'c', 'q', 'h', 'e', 't', 'c', 'q', 't', 'e', 'q'];
-    var html = '<div class="hero-bg b-tiles" aria-hidden="true">';
-    shapes.forEach(function (s, i) {
-        html += '<i class="b-' + s + ' b-c' + ((i * 2 + (i >> 2)) % 3) + '" style="--r0:' + ((i * 90) % 360) + 'deg;--dl:-' + ((i * 9.7) % 56).toFixed(1) + 's"></i>';
+    var wave = 'M0 60Q300 -30 600 60T1200 60T1800 60T2400 60T3000 60T3600 60T4200 60T4800 60';
+    var layers = [[4, 46, 9], [27, 34, 7], [50, 58, 11], [73, 40, 8]];   // [上からの位置%, 1 周期が流れる時間s, 上下の周期s]
+    var html = '<div class="hero-bg w-waves" aria-hidden="true">';
+    layers.forEach(function (l, i) {
+        html += '<svg viewBox="0 0 4800 2000" preserveAspectRatio="none" focusable="false" style="--y:' + l[0] + '%;--t:' + l[1] + 's;--b:' + l[2] + 's">'
+            + '<path d="' + wave + 'V2000H0Z"/>' + (i === 1 ? '<path class="w-edge" d="' + wave + '"/>' : '') + '</svg>';
     });
     host.insertAdjacentHTML('afterbegin', html + '</div>');
 })();
