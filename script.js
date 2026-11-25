@@ -285,15 +285,15 @@ $(function(){
 })();
 
 /* ------------------------------------------------------------
-   案5：トップの後ろに「N」の線画を置く（描かれる動きは CSS）
+   案5：幾何学タイル。q=四分円 / c=円 / h=半円 / t=三角 / e=空き（回る動きは CSS）
 ------------------------------------------------------------ */
 (function () {
-    var hero = document.querySelector('.hero');
-    if (!hero) return;
-    var N = 'M0 600V0H150L450 370V0H600V600H450L150 230V600Z';
-    hero.insertAdjacentHTML('afterbegin',
-        '<svg class="bg-n" viewBox="0 0 760 680" aria-hidden="true" focusable="false"><g transform="translate(140 40) skewX(-12)">'
-        + '<path class="n-main" pathLength="1000" d="' + N + '"/>'
-        + '<path class="n-run" pathLength="1000" d="' + N + '"/>'
-        + '</g></svg>');
+    var host = document.querySelector('.hero');
+    if (!host) return;
+    var shapes = ['q', 'c', 't', 'h', 'e', 'q', 'c', 'q', 'h', 'e', 't', 'c', 'q', 't', 'e', 'q'];
+    var html = '<div class="hero-bg b-tiles" aria-hidden="true">';
+    shapes.forEach(function (s, i) {
+        html += '<i class="b-' + s + ' b-c' + ((i * 2 + (i >> 2)) % 3) + '" style="--r0:' + ((i * 90) % 360) + 'deg;--dl:-' + ((i * 9.7) % 56).toFixed(1) + 's"></i>';
+    });
+    host.insertAdjacentHTML('afterbegin', html + '</div>');
 })();

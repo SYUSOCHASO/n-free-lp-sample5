@@ -677,12 +677,23 @@ main { overflow-x: clip; }
 @keyframes q-phone { from { opacity: 0; transform: translateY(48px); } to { opacity: 1; transform: none; } }
 @keyframes q-float { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-12px) rotate(-1deg); } }
 .hero::before, .hero::after { pointer-events: none; }
+.hero-bg { position: absolute; pointer-events: none; }
 
-/* 案5：淡いミント × 小ぶりな「N」の線画。細い線で描かれ、そのあとは線の上を小さな光がゆっくり一周し続ける（SVG は script.js が置く） */
-.hero { --h-bg: #edf6f2; --h-text: #121212; --h-accent: #21b384; --h-line: #121212; --h-chip-bg: #21b384; --h-chip-text: #fff; --h-btn-bg: #121212; --h-btn-text: #fff; --h-tag-bg: #fff; --h-tag-text: #121212; --h-marker: rgba(33, 179, 132, .3); }
-.bg-n { position: absolute; top: 9%; right: 16%; height: 52%; aspect-ratio: 760 / 680; overflow: visible; pointer-events: none; }
-.bg-n path { fill: none; stroke-dasharray: 1000; stroke-linejoin: round; }
-.bg-n .n-main { stroke: rgba(33, 179, 132, .55); stroke-width: 1.5; animation: h5-draw 3s cubic-bezier(.65, 0, .35, 1) .5s both; }
-.bg-n .n-run { stroke: #21b384; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 42 958; opacity: 0; animation: h5-draw 9s linear 3.4s infinite, q-fade 1s ease-out 3.4s both; }
-@keyframes h5-draw { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
-@media (max-width: 768px) { .bg-n { top: 14px; right: -34px; height: auto; width: 236px; } .bg-n .n-main { stroke-width: 2.4; } .bg-n .n-run { stroke-width: 7; } }
+/* 案5：イエロー × 墨。円・四分円・三角のタイルが並び、ときどき 1 枚ずつ 90 度回る（タイルは script.js が置く） */
+.hero { --h-bg: #ffd60a; --h-text: #121212; --h-accent: #121212; --h-line: #121212; --h-chip-bg: #121212; --h-chip-text: #fff; --h-btn-bg: #121212; --h-btn-text: #fff; --h-tag-bg: #fff; --h-tag-text: #121212; --h-marker: rgba(255, 255, 255, .85); --b-ink: #121212; }
+.hero .hero-title-accent { width: fit-content; background: linear-gradient(#fff, #fff) no-repeat left 88% / 100% 24%; }
+.b-tiles { right: 1.5%; top: 50%; translate: 0 -50%; --t: min(10.4vw, 140px); display: grid; grid-template-columns: repeat(4, var(--t)); animation: q-fade 1.8s ease-out .2s both; }
+.b-tiles i { display: block; width: var(--t); height: var(--t); rotate: var(--r0); animation: b-turn 56s cubic-bezier(.7, 0, .3, 1) var(--dl) infinite; }
+.b-c0 { --c: #fff; } .b-c1 { --c: var(--b-ink); } .b-c2 { --c: #f0b400; }
+.b-q { background: var(--c); border-radius: 100% 0 0 0; }
+.b-c { background: var(--c); border-radius: 50%; scale: .82; }
+.b-h { background: linear-gradient(0deg, var(--c) 50%, transparent 50%); border-radius: 50%; }
+.b-t { background: var(--c); clip-path: polygon(0 0, 100% 0, 0 100%); }
+@keyframes b-turn { 0% { transform: rotate(0); } 3%, 25% { transform: rotate(90deg); } 28%, 50% { transform: rotate(180deg); } 53%, 75% { transform: rotate(270deg); } 78%, 100% { transform: rotate(360deg); } }
+@media (max-width: 768px) {
+  .hero { --b-ink: rgba(255, 255, 255, .5); }
+  .b-c0 { --c: rgba(255, 255, 255, .75); }
+  .b-tiles { right: 0; top: 0; translate: none; --t: 62px; grid-template-columns: repeat(2, var(--t)); }
+  .b-tiles i:nth-child(n+7) { display: none; }
+  .b-tiles i { animation-duration: 28s; }
+}
