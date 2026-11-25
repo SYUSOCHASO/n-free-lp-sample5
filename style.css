@@ -629,54 +629,60 @@ main { overflow-x: clip; }
 }
 
 /* ============================================================
-   トップ（ヒーロー）の共通部分：6 案とも、動きは「静かに浮かび上がる」だけに揃える。
+   トップ（ヒーロー）の共通部分：6 案とも、動きは控えめに揃える。背景の動きはスマホでも最初の画面（文字の後ろ）に置く。
    色は各案の hero{n}.css が --h-* で決める。お悩みセクション以降は design.css のまま
 ============================================================ */
 :root { --c-green: #21b384; }
 .hero { background: var(--h-bg); color: var(--h-text); animation: none; }
 .hero .hero-promo::after { height: 1px; background: var(--h-line); animation: q-line 1.4s var(--ease-out) .2s both; }
 .hero .hero-promo-headline strong { color: var(--h-chip-text); background: var(--h-chip-bg); }
-.hero .hero-eyebrow-em { background: linear-gradient(var(--h-line), var(--h-line)) no-repeat left bottom / 100% 2px; animation: none; }
+.hero .hero-eyebrow-em { background: linear-gradient(var(--h-line), var(--h-line)) no-repeat left bottom / 100% 2px; }
 .hero .hero-title { font-size: clamp(40px, 6.6vw, 96px); }
 .hero .hero-title-accent { color: var(--h-accent); }
 .hero .hero-title-accent::after { content: none; }
-.hero .hero-subtitle strong { background: linear-gradient(var(--h-marker), var(--h-marker)) no-repeat left 100% / 100% 26%; animation: none; }
-.hero .btn-hero, .hero .btn-hero:hover { color: var(--h-btn-text); background: var(--h-btn-bg); border-color: var(--h-btn-bg); animation: none; }
+.hero .hero-subtitle strong { background: linear-gradient(var(--h-marker), var(--h-marker)) no-repeat left 100% / 100% 26%; }
+.hero .btn-hero, .hero .btn-hero:hover { color: var(--h-btn-text); background: var(--h-btn-bg); border-color: var(--h-btn-bg); }
 .hero .btn-hero { transition: filter .2s; }
 .hero .btn-hero:hover { filter: brightness(1.12); }
 .hero .btn-hero::after { content: none; }
 .hero .btn-tag, .hero .btn-hero:hover .btn-tag { color: var(--h-tag-text); background: var(--h-tag-bg); animation: none; }
-.hero .btn-hero .btn-label, .hero .btn-arrow { animation: none; }
+.hero .btn-hero .btn-label { animation: none; }
 .hero .hero-meta { perspective: none; }
-.hero .hero-meta li { border-left-color: var(--h-line); animation: none; }
+.hero .hero-meta li { border-left-color: var(--h-line); }
 
-/* 現れ方：上から順に、少し下からふわっと */
-.hero .hero-promo-headline, .hero .hero-promo-sub, .hero .hero-eyebrow, .hero .hero-title-line, .hero .hero-title-line.is-split,
-.hero .hero-subtitle, .hero .hero-cta, .hero .hero-meta { animation: q-up 1s var(--ease-out) both; }
+/* 現れ方：要素ごとに少しずつ違うが、どれも控えめ（跳ねる・走り抜ける・めくれる動きは使わない） */
+.hero .hero-promo-headline { animation: wipe-right 1s var(--ease-out) .15s both; }
+.hero .hero-promo-sub { animation: q-up 1s var(--ease-out) .35s both; }
+.hero .hero-eyebrow { animation: q-up 1s var(--ease-out) .4s both; }
+.hero .hero-eyebrow-em { animation: q-uline 1s var(--ease-out) 1.1s both; }
+.hero .hero-title-line, .hero .hero-title-line.is-split { animation: line-rise 1.2s var(--ease-out) both; }
+.hero .hero-title-line:nth-child(1) { animation-delay: .5s; }
+.hero .hero-title-line:nth-child(2) { animation-delay: .68s; }
 .hero .hero-title-line .ch { animation: none; }
-.hero .hero-promo-headline { animation-delay: .1s; }
-.hero .hero-promo-sub { animation-delay: .2s; }
-.hero .hero-eyebrow { animation-delay: .3s; }
-.hero .hero-title-line:nth-child(1) { animation-delay: .45s; }
-.hero .hero-title-line:nth-child(2) { animation-delay: .6s; }
-.hero .hero-subtitle { animation-delay: .8s; }
-.hero .hero-cta { animation-delay: .95s; }
-.hero .hero-meta { animation-delay: 1.1s; }
-.hero .hero-visual { animation: q-fade 1.6s ease-out .5s both; }
-.hero .hero-app-image { animation: q-float 8s ease-in-out 2s infinite; }
+.hero .hero-subtitle { animation: q-up 1s var(--ease-out) 1s both; }
+.hero .hero-subtitle strong { animation: q-marker 1s var(--ease-out) 1.8s both; }
+.hero .btn-hero { animation: btn-extend 1s var(--ease-out) 1.3s both; }
+.hero .btn-arrow { animation: arrow-nudge 2.6s ease-in-out 3s infinite; }
+.hero .hero-meta li { animation: q-up .9s var(--ease-out) both; }
+.hero .hero-meta li:nth-child(1) { animation-delay: 1.6s; }
+.hero .hero-meta li:nth-child(2) { animation-delay: 1.72s; }
+.hero .hero-meta li:nth-child(3) { animation-delay: 1.84s; }
+.hero .hero-visual { animation: q-phone 1.4s var(--ease-out) .6s both; }
+.hero .hero-app-image { animation: q-float 7s ease-in-out 2s infinite; }
 @keyframes q-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 @keyframes q-fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes q-line { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@keyframes q-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes q-uline { from { background-size: 0% 2px; } to { background-size: 100% 2px; } }
+@keyframes q-marker { from { background-size: 0% 26%; } to { background-size: 100% 26%; } }
+@keyframes q-phone { from { opacity: 0; transform: translateY(48px); } to { opacity: 1; transform: none; } }
+@keyframes q-float { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-12px) rotate(-1deg); } }
 .hero::before, .hero::after { pointer-events: none; }
 
-/* 案5：淡いミント × 「N」の線画。細い線で一度だけ描かれ、そのあとは静かに留まる（SVG は script.js が置く） */
+/* 案5：淡いミント × 小ぶりな「N」の線画。細い線で描かれ、そのあとは線の上を小さな光がゆっくり一周し続ける（SVG は script.js が置く） */
 .hero { --h-bg: #edf6f2; --h-text: #121212; --h-accent: #21b384; --h-line: #121212; --h-chip-bg: #21b384; --h-chip-text: #fff; --h-btn-bg: #121212; --h-btn-text: #fff; --h-tag-bg: #fff; --h-tag-text: #121212; --h-marker: rgba(33, 179, 132, .3); }
-.bg-n { position: absolute; top: -2%; right: -11%; height: 104%; aspect-ratio: 760 / 680; overflow: visible; pointer-events: none; animation: h5-float 18s ease-in-out 4s infinite alternate; }
-.bg-n path { fill: none; stroke-dasharray: 1000; }
-.bg-n .n-main { stroke: #21b384; stroke-width: 2; animation: h5-draw 3.2s cubic-bezier(.65, 0, .35, 1) .4s both; }
-.bg-n .n-echo { stroke: rgba(33, 179, 132, .35); stroke-width: 1; animation: h5-draw 3.2s cubic-bezier(.65, 0, .35, 1) .9s both; }
-.bg-n .n-fill { stroke: none; fill: rgba(33, 179, 132, .07); animation: q-fade 1.6s ease-out 2.8s both; }
+.bg-n { position: absolute; top: 9%; right: 16%; height: 52%; aspect-ratio: 760 / 680; overflow: visible; pointer-events: none; }
+.bg-n path { fill: none; stroke-dasharray: 1000; stroke-linejoin: round; }
+.bg-n .n-main { stroke: rgba(33, 179, 132, .55); stroke-width: 1.5; animation: h5-draw 3s cubic-bezier(.65, 0, .35, 1) .5s both; }
+.bg-n .n-run { stroke: #21b384; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 42 958; opacity: 0; animation: h5-draw 9s linear 3.4s infinite, q-fade 1s ease-out 3.4s both; }
 @keyframes h5-draw { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
-@keyframes h5-float { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-1.5%, 1.5%, 0); } }
-@media (max-width: 768px) { .bg-n { top: 1%; right: -30%; height: auto; width: 128%; } }
+@media (max-width: 768px) { .bg-n { top: 14px; right: -34px; height: auto; width: 236px; } .bg-n .n-main { stroke-width: 2.4; } .bg-n .n-run { stroke-width: 7; } }

@@ -293,8 +293,7 @@ $(function(){
     var N = 'M0 600V0H150L450 370V0H600V600H450L150 230V600Z';
     hero.insertAdjacentHTML('afterbegin',
         '<svg class="bg-n" viewBox="0 0 760 680" aria-hidden="true" focusable="false"><g transform="translate(140 40) skewX(-12)">'
-        + '<path class="n-echo" pathLength="1000" transform="translate(34 -24)" d="' + N + '"/>'
-        + '<path class="n-fill" d="' + N + '"/>'
         + '<path class="n-main" pathLength="1000" d="' + N + '"/>'
+        + '<path class="n-run" pathLength="1000" d="' + N + '"/>'
         + '</g></svg>');
 })();
